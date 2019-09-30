@@ -28,21 +28,21 @@
    text-decoration: none;
   
  }
- 
+/*  
  .navbar-nav{
    margin-right: 13vw;
    font-size: 18px;
    opacity: 0.8;
  
- }
+ } */
  
  .navbar-collapse{
    flex-grow:0;
  }
  
- nav .navbar-nav a{
+ /* nav .navbar-nav a{
    color: white !important;
-   /* border-left: 1px solid #efefef; */
+
    margin-right: 15% !important;
    font-size: 20px;
  
@@ -54,7 +54,7 @@
  
  nav .navbar-brand{
      color: #ffffff !important;
- }
+ } */
  #firstlook{
    background: url('../images/newspaper.jpg');
    height: 97vh;

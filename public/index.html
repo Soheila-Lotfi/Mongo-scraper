@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Smart Gardening</title>
+    <title>Mongo Scraper</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
@@ -34,8 +34,7 @@
             <nav class="navbar navbar-expand-md navbar-light fixed-top">
                 <!-- navbar-expand-md means that for medium, small, and extra small screens, the navbars will become a toggle-able navbar. meaning that, it will be collapsed in those screen sizes -->
                 <a href="#" class="navbar-brand  mr-auto">
-                    <!-- <i class="fab fa-envira"></i><i class="fab fa-envira"></i><i class="fab fa-envira"></i>
-                    <img class="img-fluid" src="images/newspaper.jpg"> -->
+                    <h2>Mongo Scraper</h2>
                 </a>
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
@@ -44,8 +43,9 @@
                     <!-- to hide the items from the navigation bar use collapse class -->
                     <div class="navbar-nav">
                         <a href="" class="nav-item nav-link active">Home</a>
-                        <a href="#articles" class="nav-item nav-link">Articles</a>
-                        <a href="#about" class="nav-item nav-link">About</a>
+                        <a href="#articles" class="nav-item nav-link">Saved Articles</a>
+                        <button class="btn btn-danger" id="scrapebtn">Scrape New Articles</button>
+                        <button class="btn btn-danger" id="clearbtn">Clear Articles</button>
 
                     </div>
                 </div>
