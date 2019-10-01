@@ -6,7 +6,7 @@ function scrapeArticles(event) {
 
     event.preventDefault();
 
-    $.getJson("/", function (data) {
+    $.getJson("/articles", function (data) {
 
         initializeRows(data);
 
@@ -15,16 +15,13 @@ function scrapeArticles(event) {
 
 }
 
-
-
-
 function initializeRows(articles) {
     $("#articles").empty();
     var articlesToAdd = [];
     for (var i = 0; i < articles.length; i++) {
         articlesToAdd.push(createNewRow(articles[i]));
     }
-    $("#articles".append(articlesToAdd);
+    $("#articles").append(articlesToAdd);
 }
 
 // This function constructs a post's HTML
