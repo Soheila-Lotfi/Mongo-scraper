@@ -1,6 +1,6 @@
-const mongoose = require("mongoos");
+const mongoose = require("mongoose");
 
-const Schema = mongoose.schema;
+const Schema = mongoose.Schema;
 
 let CommentSchema = new Schema({
     title: {

@@ -1,6 +1,6 @@
-const mongoose = require("mongoos");
+const mongoose = require("mongoose");
 
-const Schema = mongoose.schema;
+const Schema = mongoose.Schema;
 
 let ArticleSchema = new Schema({
     title: {
@@ -8,6 +8,10 @@ let ArticleSchema = new Schema({
         required: true
     },
     link: {
+        type: String,
+        required: true
+    },
+    summary: {
         type: String,
         required: true
     },

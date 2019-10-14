@@ -17,5 +17,15 @@
   "bugs": {
     "url": "https://github.com/Soheila-Lotfi/Mongo-scraper/issues"
   },
-  "homepage": "https://github.com/Soheila-Lotfi/Mongo-scraper#readme"
+  "homepage": "https://github.com/Soheila-Lotfi/Mongo-scraper#readme",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "cheerio": "^1.0.0-rc.3",
+    "express": "^4.17.1",
+    "mongoose": "^5.7.3",
+    "morgan": "^1.9.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.3"
+  }
 }
