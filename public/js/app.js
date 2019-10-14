@@ -69,11 +69,23 @@ function createNewRow(article) {
 
 function saveArticles() {
 
-    var article = $(this).parent().parent().data("article")    // this refers to save button
-
-
+    const article = $(this).parent().parent().data("article")    // this refers to save button
     $(this).parent().parent().hide();
-    articles.push(article);
+    const updateArticle = {
+        title: article.title,
+        link: article.link,
+        summary: article.summary,
+        saved: true,
+        comment: article.comment
+    }
+    $.ajax({
+        url: "/articles",
+        method: "PUT",
+        data: updateArticle
+
+    }).then(function () {
+        console.log(" update articles successfully!")
+    })
 
 }
 
