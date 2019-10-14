@@ -84,7 +84,6 @@ function createNewRow(article) {
 function saveArticles() {
 
     const article = $(this).parent().parent().data("article")    // this refers to save button
-    // $(this).parent().parent().hide();
     const id = article._id;
     $.ajax({
         url: "/articles/"
