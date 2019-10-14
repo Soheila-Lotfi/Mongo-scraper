@@ -1,77 +1,79 @@
 
-  getArticles("/articles");
+getArticles("/articles");
 
-    $(document).on("click", "#scrapebtn", scrapeArticles);
-    // $(document).on("click", "#clearbtn", clearArticles);
-    $(document).on("click", ".save", saveArticles);
-    
+$(document).on("click", "#scrapebtn", scrapeArticles);
+// $(document).on("click", "#clearbtn", clearArticles);
+$(document).on("click", ".save", saveArticles);
 
-    function scrapeArticles(event) {
+var articles;
 
-        event.preventDefault();
-        getArticles("/articles");
+function scrapeArticles(event) {
+
+    event.preventDefault();
+    getArticles("/articles");
 
 
+}
+
+function getArticles(url) {
+
+    $.getJSON(url, function (data) {
+
+        initializeRows(data);
+    })
+
+
+}
+
+function initializeRows(articles) {
+    $("#articles").empty();
+    var articlesToAdd = [];
+    for (var i = 0; i < articles.length; i++) {
+        articlesToAdd.push(createNewRow(articles[i]));
     }
+    $("#articles").append(articlesToAdd);
+}
 
-    function getArticles(url) {
+// This function constructs a post's HTML
+function createNewRow(article) {
 
-        $.getJSON(url, function (data) {
-
-            initializeRows(data);
-        })
-
-
-    }
-
-    function initializeRows(articles) {
-        $("#articles").empty();
-        var articlesToAdd = [];
-        for (var i = 0; i < articles.length; i++) {
-            articlesToAdd.push(createNewRow(articles[i]));
-        }
-        $("#articles").append(articlesToAdd);
-    }
-
-    // This function constructs a post's HTML
-    function createNewRow(article) {
-
-        var newArticleCard = $("<div>");
-        newArticleCard.addClass("card");
-        // card-header
-        var newArticleCardHeading = $("<div>");
-        newArticleCardHeading.addClass("card-header");
-        var saveArticle = $("<button>");
-        saveArticle.text("SaveArticle");
-        saveArticle.addClass("save btn btn-danger");
-        var newArticleHeadline = $("<h2>").text(article.title + "");
+    var newArticleCard = $("<div>");
+    newArticleCard.addClass("card");
+    // card-header
+    var newArticleCardHeading = $("<div>");
+    newArticleCardHeading.addClass("card-header");
+    var saveArticle = $("<button>");
+    saveArticle.text("SaveArticle");
+    saveArticle.addClass("save btn btn-danger");
+    var newArticleHeadline = $("<h2>").text(article.title + "");
 
 
-        // card-body
-        var newArticleCardBody = $("<div>");
-        newArticleCardBody.addClass("card-body");
-        var newArticleBody = $("<p>").text(article.summary);
-        var newArticleLink = $("<a>").text(article.link).attr("href", article.link)
+    // card-body
+    var newArticleCardBody = $("<div>");
+    newArticleCardBody.addClass("card-body");
+    var newArticleBody = $("<p>").text(article.summary);
+    var newArticleLink = $("<a>").text(article.link).attr("href", article.link)
 
 
-        newArticleCardHeading.append(newArticleHeadline);
-        newArticleCardHeading.append(saveArticle);
-        newArticleCardBody.append(newArticleLink);
-        newArticleCardBody.append(newArticleBody);
+    newArticleCardHeading.append(newArticleHeadline);
+    newArticleCardHeading.append(saveArticle);
+    newArticleCardBody.append(newArticleLink);
+    newArticleCardBody.append(newArticleBody);
 
 
-        newArticleCard.append(newArticleCardHeading);
-        newArticleCard.append(newArticleCardBody);
-        newArticleCard.data("article", article);
-        return newArticleCard;
-    }
-  
-function saveArticles () { 
+    newArticleCard.append(newArticleCardHeading);
+    newArticleCard.append(newArticleCardBody);
+    newArticleCard.data("article", article);
+    return newArticleCard;
+}
 
-var article=$(this).parent().parent().data("article")    // this refers to save button
-var id=article._id;
+function saveArticles() {
 
-$(this).parent().parent().hide();
+    var article = $(this).parent().parent().data("article")    // this refers to save button
+
+
+    $(this).parent().parent().hide();
+    articles.push(article);
 
 }
 
