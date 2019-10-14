@@ -66,28 +66,31 @@ app.get("/", function (req, res) {
                 });
         });
 
-     res.json(result);
+        res.json(result);
     });
 });
 
 // Route for getting all Articles from the db
 app.get("/articles", function (req, res) {
 
-    db.Article.find({}).then(function (data) {
+    db.Article.find({saved: false}).then(function (data) {
         res.json(data);
     }).catch(function (err) {
         res.json(err);
     })
 });
 
-app.get("/saved", function (req, res) {
-
-    db.Article.find({}).then(function (data) {
-        res.json(data);
-    }).catch(function (err) {
-        res.json(err);
+app.put("/articles/:id", function (req, res) {
+    db.Article.findOneAndUpdate({ _id: req.params.id }, { saved: true }).then(function (dbArticle) {
+        // If we were able to successfully update an Article, send it back to the client
+        res.json(dbArticle);
     })
-});
+        .catch(function (err) {
+            // If an error occurred, send it to the client
+            res.json(err);
+        });
+})
+
 
 
 

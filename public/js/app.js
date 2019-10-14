@@ -71,22 +71,11 @@ function saveArticles() {
 
     const article = $(this).parent().parent().data("article")    // this refers to save button
     $(this).parent().parent().hide();
-    const updateArticle = {
-        title: article.title,
-        link: article.link,
-        summary: article.summary,
-        saved: true,
-        comment: article.comment
-    }
+    const id = article._id;
     $.ajax({
-        url: "/articles",
+        url: "/articles/"+id,
         method: "PUT",
-        data: updateArticle
-
-    }).then(function () {
-        console.log(" update articles successfully!")
-    })
-
+    });
 }
 
 
