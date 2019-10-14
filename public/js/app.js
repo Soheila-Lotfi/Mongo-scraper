@@ -1,5 +1,19 @@
 
-getArticles("/articles");
+// getArticles("/scrape");
+
+// for the first time the user load the page
+
+
+
+function scrape() {
+    $.ajax({ url: "/scrape", method: "GET" }).then(function (err, res) {
+        if (err) throw err;
+        getArticles("/articles");
+    })
+}
+
+scrape();
+
 
 $(document).on("click", "#scrapebtn", scrapeArticles);
 // $(document).on("click", "#clearbtn", clearArticles);
@@ -73,8 +87,8 @@ function saveArticles() {
     $(this).parent().parent().hide();
     const id = article._id;
     $.ajax({
-        url: "/articles/"+id,
-        method: "PUT",
+        url: "/articles/" + id,
+        method: "PUT"
     });
 }
 

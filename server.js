@@ -11,7 +11,7 @@ var cheerio = require("cheerio");
 // Require all models
 var db = require("./models");
 
-var PORT = 3023;
+var PORT = 3025;
 
 // Initialize Express
 var app = express();
@@ -32,12 +32,15 @@ mongoose.connect("mongodb://localhost/mongoscraper", { useUnifiedTopology: true 
 // Routes
 
 // A GET route for scraping the new york times website
-app.get("/", function (req, res) {
+app.get("/scrape", function (req, res) {
 
     // First, we grab the body of the html with axios
     axios.get("https://www.nytimes.com/").then(function (response) {
         // Then, we load that into cheerio and save it to $ for a shorthand selector
         var $ = cheerio.load(response.data);
+
+
+
 
         // Now, we grab every h2 within an article tag, and do the following:
         $("article a").each(function (i, element) {
@@ -53,6 +56,9 @@ app.get("/", function (req, res) {
             result.summary = $(this)
                 .find("p")
                 .text();
+                result.saved="false";
+            console.log("hi");
+
 
             // Create a new Article using the `result` object built from scraping
             db.Article.create(result)
@@ -73,24 +79,32 @@ app.get("/", function (req, res) {
 // Route for getting all Articles from the db
 app.get("/articles", function (req, res) {
 
-    db.Article.find({saved: false}).then(function (data) {
+    db.Article.find({}).then(function (data) {
         res.json(data);
     }).catch(function (err) {
         res.json(err);
     })
 });
 
-app.put("/articles/:id", function (req, res) {
-    db.Article.findOneAndUpdate({ _id: req.params.id }, { saved: true }).then(function (dbArticle) {
-        // If we were able to successfully update an Article, send it back to the client
-        res.json(dbArticle);
-    })
-        .catch(function (err) {
-            // If an error occurred, send it to the client
-            res.json(err);
-        });
-})
+// app.put("/articles/:id", function (req, res) {
+//     db.Article.findOneAndUpdate({ _id: req.params.id }, { saved: true }).then(function (dbArticle) {
+//         // If we were able to successfully update an Article, send it back to the client
+//         res.json(dbArticle);
+//     })
+//         .catch(function (err) {
+//             // If an error occurred, send it to the client
+//             res.json(err);
+//         });
+// })
 
+// app.get("/saved", function (req, res) {
+
+//     db.Article.find({}).then(function (data) {
+//         res.json(data);
+//     }).catch(function (err) {
+//         res.json(err);
+//     })
+// });
 
 
 
