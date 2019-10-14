@@ -2,7 +2,9 @@
   getArticles("/articles");
 
     $(document).on("click", "#scrapebtn", scrapeArticles);
-    $(document).on("click", "#clearbtn", clearArticles);
+    // $(document).on("click", "#clearbtn", clearArticles);
+    $(document).on("click", ".save", saveArticles);
+    
 
     function scrapeArticles(event) {
 
@@ -64,7 +66,14 @@
         return newArticleCard;
     }
   
+function saveArticles () { 
 
+var article=$(this).parent().parent().data("article")    // this refers to save button
+var id=article._id;
+
+$(this).parent().parent().hide();
+
+}
 
 
 
