@@ -16,8 +16,8 @@ scrape();
 
 
 $(document).on("click", "#scrapebtn", scrapeArticles);
-// $(document).on("click", "#clearbtn", clearArticles);
 $(document).on("click", ".save", saveArticles);
+$(document).on("click", "#clearbtn", clearArticles);
 
 var articles;
 
@@ -87,11 +87,37 @@ function saveArticles() {
     const id = article._id;
     $.ajax({
         url: "/articles/"
-         + id,
+            + id,
         method: "PUT"
-    }).then(function(){
+    }).then(function () {
         getArticles("/articles")
     });
+}
+
+function clearArticles() {
+
+    $("#articles").empty();
+    var $newRows = $(
+        [
+
+            "<div class='row'>",
+            "<div class='col-12'>",
+            "<div>Oh! LOOK LIKES WE DO NOT HAVE ANY ARTICLES!</div>",
+            "</div>",
+            "</div>",
+            "<div class='row'>",
+            "<div class='card'>",
+            "<div class='card-header'>WHAT WOULD YOU LIKE TO DO?</div>",
+            "<div class='card-body'>",
+            "<a href=''>Try Scraping New Articles</a>",
+            "<a href='/saved'>Go To Saved Articles</a>",
+            "</div>",
+            "</div>",
+            "</div>"
+        ].join("")
+    );
+    $("#articles").append($newRows);
+
 }
 
 
