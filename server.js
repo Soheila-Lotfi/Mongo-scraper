@@ -1,7 +1,7 @@
 var express = require("express");
 var logger = require("morgan");
 var mongoose = require("mongoose");
-var path=require("path");
+var path = require("path");
 // Our scraping tools
 // Axios is a promised-based http library, similar to jQuery's Ajax method
 // It works on the client and on the server
@@ -85,7 +85,7 @@ app.get("/articles", function (req, res) {
         res.json(err);
     })
 });
-
+// Route for updating articles
 app.put("/articles/:id", function (req, res) {
     db.Article.findOneAndUpdate({ _id: req.params.id }, { saved: true }).then(function (dbArticle) {
         // If we were able to successfully update an Article, send it back to the client
@@ -96,15 +96,24 @@ app.put("/articles/:id", function (req, res) {
             res.json(err);
         });
 })
-
+// route for getting saved articles
 app.get("/api/saved", function (req, res) {
 
-    db.Article.find({saved:true}).then(function (data) {
+    db.Article.find({ saved: true }).then(function (data) {
         res.json(data);
     }).catch(function (err) {
         res.json(err);
     })
 });
+// Route for deleting an article
+app.delete("/api/articles/:id", function (req, res) {
+
+    db.Article.deleteOne({ _id: req.params.id }).then(function (date) {
+        res.json(data);
+    }).catch(function (err) {
+        res.json(err)
+    })
+})
 
 // html routes
 app.get("/saved", function (req, res) {

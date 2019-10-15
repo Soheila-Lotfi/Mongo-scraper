@@ -2,9 +2,8 @@
 
 getArticles("/api/saved");
 
-// $(document).on("click", "#scrapebtn", scrapeArticles);
-// // $(document).on("click", "#clearbtn", clearArticles);
-// $(document).on("click", ".save", saveArticles);
+
+$(document).on("click", ".delete", deleteArticles);
 
 // var articles;
 
@@ -45,7 +44,7 @@ function createNewRow(article) {
     newArticleCardHeading.addClass("card-header");
     var deleteArticle = $("<button>");
     deleteArticle.text("DELETE FROM SAVED");
-    deleteArticle.addClass("save btn btn-danger");
+    deleteArticle.addClass("delete btn btn-danger");
     var newArticleHeadline = $("<h2>").text(article.title + "");
 
 
@@ -66,21 +65,21 @@ function createNewRow(article) {
     newArticleCard.append(newArticleCardBody);
     newArticleCard.data("article", article);
     return newArticleCard;
-   
+
 }
 
-// function saveArticles() {
+function deleteArticles() {
 
-//     const article = $(this).parent().parent().data("article")    // this refers to save button
-//     const id = article._id;
-//     $.ajax({
-//         url: "/articles/"
-//             + id,
-//         method: "PUT"
-//     }).then(function () {
-//         getArticles("/articles")
-//     });
-// }
+    const article = $(this).parent().parent().data("article")    // this refers to save button
+    const id = article._id;
+    $.ajax({
+        url: "/api/articles/" + id,
+        method: "DELETE"
+    }).then(function () {
+        getArticles("/api/saved")
+    });
+}
+
 
 
 
