@@ -115,9 +115,13 @@ app.delete("/api/articles/:id", function (req, res) {
     })
 })
 
-// html routes
+// html routes for two pages-/saved and / (home)
 app.get("/saved", function (req, res) {
     res.sendFile(path.join(__dirname, "../MONGO-SCRAPER/public/save.html"));
+});
+
+app.get("/", function (req, res) {
+    res.sendFile(path.join(__dirname, "../MONGO-SCRAPER/public/index.html"));
 });
 
 
