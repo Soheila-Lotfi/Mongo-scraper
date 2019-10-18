@@ -123,8 +123,7 @@ function makeNewRow() {
             "<div class='card'>",
             "<div class='card-header'>WHAT WOULD YOU LIKE TO DO?</div>",
             "<div class='card-body'>",
-            "<a href='/'>Try Scraping New Articles</a>",
-            "<a href='/saved'>Go To Saved Articles</a>",
+            "<a href='/'>Browse Articles</a>",
             "</div>",
             "</div>",
             "</div>"
