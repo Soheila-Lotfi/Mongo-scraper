@@ -13,7 +13,7 @@ let ArticleSchema = new Schema({
     },
     summary: {
         type: String,
-        required: true
+
     },
     saved: {
         type: Boolean,

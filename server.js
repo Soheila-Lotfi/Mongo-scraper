@@ -11,7 +11,7 @@ var cheerio = require("cheerio");
 // Require all models
 var db = require("./models");
 
-var PORT = 3025;
+var PORT = 3026;
 
 // Initialize Express
 var app = express();
@@ -42,8 +42,9 @@ app.get("/scrape", function (req, res) {
 
 
 
-        // Now, we grab every h2 within an article tag, and do the following:
-        $("article a").each(function (i, element) {
+        // Now, we grab  every h2 within an article tag, and do the following:
+        var articles = $("article a").slice(0, 10)
+        articles.each(function (i, element) {
             // Save an empty result object
             var result = {};
 
@@ -57,7 +58,7 @@ app.get("/scrape", function (req, res) {
                 .find("p")
                 .text();
             result.saved = "false";
-            console.log("hi");
+
 
 
             // Create a new Article using the `result` object built from scraping
@@ -114,7 +115,16 @@ app.delete("/api/articles/:id", function (req, res) {
         res.json(err)
     })
 })
+// Route for deleting all the articles
 
+app.delete("/api/articles", function (req, res) {
+
+    db.Article.remove().then(function (date) {
+        res.json(data);
+    }).catch(function (err) {
+        res.json(err)
+    })
+})
 // html routes for two pages-/saved and / (home)
 app.get("/saved", function (req, res) {
     res.sendFile(path.join(__dirname, "../MONGO-SCRAPER/public/save.html"));

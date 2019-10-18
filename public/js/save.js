@@ -1,10 +1,12 @@
 
 
+
 getArticles("/api/saved");
 
 
 $(document).on("click", ".delete", deleteArticles);
 $(document).on("click", "#clearbtn", clearArticles);
+$(document).on("click", ".notebtn", createNotes);
 
 // var articles;
 
@@ -19,8 +21,15 @@ $(document).on("click", "#clearbtn", clearArticles);
 function getArticles(url) {
 
     $.getJSON(url, function (data) {
+        if (data.length > 0) {
+            initializeRows(data);
 
-        initializeRows(data);
+        }
+        else if (data.length === 0) {
+            makeNewRow();
+
+        }
+
     })
 
 
@@ -46,6 +55,10 @@ function createNewRow(article) {
     var deleteArticle = $("<button>");
     deleteArticle.text("DELETE FROM SAVED");
     deleteArticle.addClass("delete btn btn-danger");
+
+    var articleNotes = $("<button>");
+    articleNotes.text("ARTICLE NOTES");
+    articleNotes.addClass("notebtn btn btn-danger");
     var newArticleHeadline = $("<h2>").text(article.title + "");
 
 
@@ -57,7 +70,7 @@ function createNewRow(article) {
 
 
     newArticleCardHeading.append(newArticleHeadline);
-    newArticleCardHeading.append(deleteArticle);
+    newArticleCardHeading.append(deleteArticle, articleNotes);
     newArticleCardBody.append(newArticleLink);
     newArticleCardBody.append(newArticleBody);
 
@@ -83,8 +96,22 @@ function deleteArticles() {
 
 function clearArticles() {
 
-    $("#articles").empty();
-    var $newRows = $(
+    // delete articles from database
+    $.ajax({
+        url: "/api/articles",
+        method: "DELETE"
+    }).then(function () {
+        $("#articles").empty();
+        makeNewRow();
+    })
+    // empty div with id=articles from the home page
+
+}
+
+function makeNewRow() {
+    // $("#articles").empty();
+
+    var newRows = $(
         [
 
             "<div class='row'>",
@@ -96,18 +123,62 @@ function clearArticles() {
             "<div class='card'>",
             "<div class='card-header'>WHAT WOULD YOU LIKE TO DO?</div>",
             "<div class='card-body'>",
-            "<a href=''>Try Scraping New Articles</a>",
+            "<a href='/'>Try Scraping New Articles</a>",
             "<a href='/saved'>Go To Saved Articles</a>",
             "</div>",
             "</div>",
             "</div>"
         ].join("")
     );
-    $("#articles").append($newRows);
+    $("#articles").append(newRows);
 
 }
 
 
+function createNotes() {
+
+    // // var modalHead=$("<div>").text("hi")
+    // // $("document").append(modalHead);
+
+
+    // //modal
+    // var modalNote = $("<div>");
+    // modalNote.addClass("modal").attr("id", "modalForNotes").attr("role", "dialog");
+
+    // var modalDialog = $("<div>").addClass("modal-dialog").attr("role", "document");
+    // var modalContent = $("<div>").addClass("modal-content");
+
+
+    // //modal-header
+    // var modalHeader = $("<div>").addClass("modal-header");
+    // var modalTitle = $("<h4>").addClass("modal-title").text("Note For Article:");
+
+    // var closeButton = $("<button>").addClass("close").attr("data-dismiss", "modal");
+    // closeButton.text("+");
+    // modalHeader.append(modalTitle, closeButton);
+
+
+    // //modal-body
+    // var modalBody = $("<div>").addClass("modal-body");
+    // var modalBodyInput = $("<input>").attr("placeholder", "new note").attr("name", "newNote");
+    // modalBody.append(modalBodyInput);
+
+
+    // //modal-footer
+    // var modalFooter = $("<div>").addClass("modal-footer");
+    // var saveNote = $("<button>");
+    // saveNote.text("SAVE NOTE");
+    // saveNote.addClass(" btn btn-primary");
+    // modalFooter.append(saveNote);
+
+    // ///////
+    // modalContent.append(modalHeader, modalBody, modalFooter);
+    // modalDialog.append(modalContent);
+    // modalNote.append(modalDialog);
+
+    $("#modalForNotes").modal();
+
+}
 
 
 
