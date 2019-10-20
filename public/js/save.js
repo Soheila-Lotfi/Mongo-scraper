@@ -7,7 +7,7 @@ getArticles("/api/saved");
 $(document).on("click", ".delete", deleteArticles);
 $(document).on("click", "#clearbtn", clearArticles);
 $(document).on("click", ".notebtn", createNotes);
-
+$(document).on("click", ".save", saveNotes);
 // var articles;
 
 // function scrapeArticles(event) {
@@ -181,7 +181,20 @@ function createNotes() {
 }
 
 
+function saveNotes() {
 
+    var comment = $("#userComment").val();
+    var article = $(this).parent().parent().data("article");
+    var id = article._id;
+
+    $.ajax({
+        url: "/notes" + id,
+        method: "POST",
+        data: {
+            body: comment
+        }
+    })
+}
 
 
 
