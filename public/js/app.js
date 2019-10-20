@@ -140,7 +140,7 @@ function makeNewRow() {
     var newRows = $(
         [
 
-            "<div class='row'>",
+            "<div id='firstline' class='row'>",
             "<div class='col-12'>",
             "<div>Oh! LOOK LIKES WE DO NOT HAVE ANY ARTICLES!</div>",
             "</div>",
@@ -149,7 +149,7 @@ function makeNewRow() {
             "<div class='card'>",
             "<div class='card-header'>WHAT WOULD YOU LIKE TO DO?</div>",
             "<div class='card-body'>",
-            "<a href='/'>Try Scraping New Articles</a>",
+            "<button onclick='scrapeArticles()'>Try Scraping New Articles</button>",
             "<a href='/saved'>Go To Saved Articles</a>",
             "</div>",
             "</div>",

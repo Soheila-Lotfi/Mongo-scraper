@@ -90,6 +90,7 @@ function deleteArticles() {
         url: "/api/articles/" + id,
         method: "DELETE"
     }).then(function () {
+        $("#articles").empty();
         getArticles("/api/saved")
     });
 }
