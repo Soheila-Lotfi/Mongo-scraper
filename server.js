@@ -125,6 +125,15 @@ app.delete("/api/articles", function (req, res) {
         res.json(err)
     })
 })
+
+// route for saving a comment
+
+app.post("/notes/:id", function (req, res) {
+    db.Comment.create(req.body).then(function (dbComment) {
+
+        db.Article.findOneAndUpdate({ _id: req.params.id }, { note: dbComment._id }, { new: true });
+    })
+})
 // html routes for two pages-/saved and / (home)
 app.get("/saved", function (req, res) {
     res.sendFile(path.join(__dirname, "../MONGO-SCRAPER/public/save.html"));

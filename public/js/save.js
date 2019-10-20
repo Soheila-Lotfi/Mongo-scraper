@@ -188,7 +188,7 @@ function saveNotes() {
     var id = article._id;
 
     $.ajax({
-        url: "/notes" + id,
+        url: "/notes/" + id,
         method: "POST",
         data: {
             body: comment
