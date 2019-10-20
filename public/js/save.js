@@ -7,7 +7,7 @@ getArticles("/api/saved");
 $(document).on("click", ".delete", deleteArticles);
 $(document).on("click", "#clearbtn", clearArticles);
 $(document).on("click", ".notebtn", createNotes);
-$(document).on("click", ".save", saveNotes);
+// $(document).on("click", ".save", saveNotes);
 // var articles;
 
 // function scrapeArticles(event) {
@@ -136,65 +136,32 @@ function makeNewRow() {
 
 
 function createNotes() {
-
-    // // var modalHead=$("<div>").text("hi")
-    // // $("document").append(modalHead);
-
-
-    // //modal
-    // var modalNote = $("<div>");
-    // modalNote.addClass("modal").attr("id", "modalForNotes").attr("role", "dialog");
-
-    // var modalDialog = $("<div>").addClass("modal-dialog").attr("role", "document");
-    // var modalContent = $("<div>").addClass("modal-content");
-
-
-    // //modal-header
-    // var modalHeader = $("<div>").addClass("modal-header");
-    // var modalTitle = $("<h4>").addClass("modal-title").text("Note For Article:");
-
-    // var closeButton = $("<button>").addClass("close").attr("data-dismiss", "modal");
-    // closeButton.text("+");
-    // modalHeader.append(modalTitle, closeButton);
-
-
-    // //modal-body
-    // var modalBody = $("<div>").addClass("modal-body");
-    // var modalBodyInput = $("<input>").attr("placeholder", "new note").attr("name", "newNote");
-    // modalBody.append(modalBodyInput);
-
-
-    // //modal-footer
-    // var modalFooter = $("<div>").addClass("modal-footer");
-    // var saveNote = $("<button>");
-    // saveNote.text("SAVE NOTE");
-    // saveNote.addClass(" btn btn-primary");
-    // modalFooter.append(saveNote);
-
-    // ///////
-    // modalContent.append(modalHeader, modalBody, modalFooter);
-    // modalDialog.append(modalContent);
-    // modalNote.append(modalDialog);
-
+    // display the modal
     $("#modalForNotes").modal();
-
-}
-
-
-function saveNotes() {
-
-    var comment = $("#userComment").val();
+    // get the id of the article and show the id on the modal-header
     var article = $(this).parent().parent().data("article");
+    console.log(article)
     var id = article._id;
-
-    $.ajax({
-        url: "/notes/" + id,
-        method: "POST",
-        data: {
-            body: comment
-        }
-    })
+    var articleId = $("<h4>").html("Notes for the article:" + id);
+    $(".modal-header").append(articleId);
 }
+
+
+// function saveNotes() {
+
+//     var comment = $("#userComment").val();
+//     var article = $(this).parent().parent().data("article");
+//     console.log(article)
+//     var id = article._id;
+
+//     $.ajax({
+//         url: "/notes/" + id,
+//         method: "POST",
+//         data: {
+//             body: comment
+//         }
+//     })
+// }
 
 
 
