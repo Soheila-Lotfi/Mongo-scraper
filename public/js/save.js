@@ -146,6 +146,19 @@ function createNotes() {
     var articleId = $(["<h4>notes for the article :</h4>", "<span class='associatedid'>" + id + "</span>"].join(""));
     $(".modal-header").html(articleId);
 
+    $.ajax({
+        url: "/notes/" + id,
+        method: "GET",
+    }).then(function(data){
+        $(".note-container").empty();
+        data.forEach(element => {
+            var list=$("<li>").addClass("list-group-item").text(element.comment.body);
+            $(".note-container").append(list);
+        });
+
+        // <li class="list-group-item">No notes for this article yet.</li>
+    })
+
 }
 
 
