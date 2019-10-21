@@ -7,7 +7,7 @@ getArticles("/api/saved");
 $(document).on("click", ".delete", deleteArticles);
 $(document).on("click", "#clearbtn", clearArticles);
 $(document).on("click", ".notebtn", createNotes);
-// $(document).on("click", ".save", saveNotes);
+$(document).on("click", ".save", saveNotes);
 // var articles;
 
 // function scrapeArticles(event) {
@@ -140,28 +140,32 @@ function createNotes() {
     $("#modalForNotes").modal();
     // get the id of the article and show the id on the modal-header
     var article = $(this).parent().parent().data("article");
-    console.log(article)
+
     var id = article._id;
-    var articleId = $("<h4>").html("Notes for the article:" + id);
-    $(".modal-header").append(articleId);
+
+    var articleId = $(["<h4>notes for the article :</h4>", "<span class='associatedid'>" + id + "</span>"].join(""));
+    $(".modal-header").html(articleId);
+
 }
 
 
-// function saveNotes() {
+function saveNotes() {
 
-//     var comment = $("#userComment").val();
-//     var article = $(this).parent().parent().data("article");
-//     console.log(article)
-//     var id = article._id;
+    var comment = $("#userComment").val();
+    var id = $(".associatedid").text();   // grab the text inside the sapn using text() or html() method
 
-//     $.ajax({
-//         url: "/notes/" + id,
-//         method: "POST",
-//         data: {
-//             body: comment
-//         }
-//     })
-// }
+    $.ajax({
+        url: "/notes/" + id,
+        method: "POST",
+        data: {
+            body: comment
+        }
+    }).then(function (data) {
+        $("#modalForNotes").hideAll();
+
+        
+    })
+}
 
 
 

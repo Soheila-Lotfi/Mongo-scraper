@@ -131,7 +131,12 @@ app.delete("/api/articles", function (req, res) {
 app.post("/notes/:id", function (req, res) {
     db.Comment.create(req.body).then(function (dbComment) {
 
-        db.Article.findOneAndUpdate({ _id: req.params.id }, { note: dbComment._id }, { new: true });
+        return db.Article.findOneAndUpdate({ _id: req.params.id }, { comment: dbComment._id }, { new: true });
+   
+    
+    }).then(function(dbArticle){
+        res.json(dbArticle);
+        console.log(dbArticle)
     })
 })
 // html routes for two pages-/saved and / (home)
