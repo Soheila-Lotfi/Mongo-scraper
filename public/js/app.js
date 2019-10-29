@@ -76,26 +76,25 @@ function initializeRows(articles) {
 function createNewRow(article) {
 
     var newArticleCard = $("<div>");
-    newArticleCard.addClass("card");
+    newArticleCard.addClass("card mt-3");
     // card-header
     var newArticleCardHeading = $("<div>");
-    newArticleCardHeading.addClass("card-header");
+    newArticleCardHeading.addClass("card-header ");
     var saveArticle = $("<button>");
     saveArticle.text("SaveArticle");
-    saveArticle.addClass("save btn btn-danger");
-    var newArticleHeadline = $("<h2>").text(article.title + "");
+    saveArticle.addClass("save btn ml-5 ");
+    var newArticleHeadline = $("<a>").text(article.title + "").attr("href", article.link);
 
 
     // card-body
     var newArticleCardBody = $("<div>");
     newArticleCardBody.addClass("card-body");
     var newArticleBody = $("<p>").text(article.summary);
-    var newArticleLink = $("<a>").text(article.link).attr("href", article.link)
+
 
 
     newArticleCardHeading.append(newArticleHeadline);
     newArticleCardHeading.append(saveArticle);
-    newArticleCardBody.append(newArticleLink);
     newArticleCardBody.append(newArticleBody);
 
 
@@ -140,19 +139,13 @@ function makeNewRow() {
     var newRows = $(
         [
 
-            "<div id='firstline' class='row'>",
-            "<div class='col-12'>",
-            "<div>Oh! LOOK LIKES WE DO NOT HAVE ANY ARTICLES!</div>",
-            "</div>",
-            "</div>",
             "<div class='row'>",
-            "<div class='card'>",
-            "<div class='card-header'>WHAT WOULD YOU LIKE TO DO?</div>",
-            "<div class='card-body'>",
-            "<button onclick='scrapeArticles()'>Try Scraping New Articles</button>",
-            "<a href='/saved'>Go To Saved Articles</a>",
-            "</div>",
-            "</div>",
+            "<div class='col-12'>",
+            "<div style='text-align: center; margin-top: 10px; background-color: #00e8ff;height: 50px;padding: 10px;font-weight: bold'>Oh! LOOK LIKES WE DO NOT HAVE ANY ARTICLES!</div>",
+            "<div style='text-align: center; margin-top: 10px; background-color: #b5ff00;height: 50px;padding: 10px;font-weight: bold'>WHAT WOULD YOU LIKE TO DO?</div>",
+            "<div style='text-align: center; margin-top: 10px; background-color: #ffd300;height: 50px;padding: 10px;font-weight: bold'>",
+            "<a href='#' onclick='scrapeArticles()' style='color: #560c94; text-align: center; margin-top: 10px; background-color: #ffd300;height: 50px;padding: 10px;font-weight: bold; text-decoration:none'>Try Scraping New Articles</a>",
+            "<a href='/saved'  style='color: #560c94; text-align: center; margin-top: 10px; background-color: #ffd300;height: 50px;padding: 10px;font-weight: bold; text-decoration:none'>Go To Saved Articles</a>",
             "</div>"
         ].join("")
     );

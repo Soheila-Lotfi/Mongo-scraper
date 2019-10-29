@@ -22,10 +22,12 @@ function getArticles(url) {
 
     $.getJSON(url, function (data) {
         if (data.length > 0) {
+
             initializeRows(data);
 
         }
         else if (data.length === 0) {
+            $("#articles").empty();
             makeNewRow();
 
         }
@@ -48,30 +50,32 @@ function initializeRows(articles) {
 function createNewRow(article) {
 
     var newArticleCard = $("<div>");
-    newArticleCard.addClass("card");
+    newArticleCard.addClass("card mt-3");
     // card-header
     var newArticleCardHeading = $("<div>");
     newArticleCardHeading.addClass("card-header");
     var deleteArticle = $("<button>");
     deleteArticle.text("DELETE FROM SAVED");
-    deleteArticle.addClass("delete btn btn-danger");
+    deleteArticle.addClass("delete btn mr-5").css("right", "120px");
+
+
+
 
     var articleNotes = $("<button>");
     articleNotes.text("ARTICLE NOTES");
-    articleNotes.addClass("notebtn btn btn-danger");
-    var newArticleHeadline = $("<h2>").text(article.title + "");
+    articleNotes.addClass("notebtn btn ml-5 ").attr("data-toggle", "modal").attr("data-target", "myModal");
+    var newArticleHeadline =  $("<a>").text(article.title + "").attr("href", article.link);
 
 
     // card-body
     var newArticleCardBody = $("<div>");
     newArticleCardBody.addClass("card-body");
     var newArticleBody = $("<p>").text(article.summary);
-    var newArticleLink = $("<a>").text(article.link).attr("href", article.link)
+
 
 
     newArticleCardHeading.append(newArticleHeadline);
     newArticleCardHeading.append(deleteArticle, articleNotes);
-    newArticleCardBody.append(newArticleLink);
     newArticleCardBody.append(newArticleBody);
 
 
@@ -90,7 +94,7 @@ function deleteArticles() {
         url: "/api/articles/" + id,
         method: "DELETE"
     }).then(function () {
-        $("#articles").empty();
+
         getArticles("/api/saved")
     });
 }
@@ -117,16 +121,10 @@ function makeNewRow() {
 
             "<div class='row'>",
             "<div class='col-12'>",
-            "<div>Oh! LOOK LIKES WE DO NOT HAVE ANY ARTICLES!</div>",
-            "</div>",
-            "</div>",
-            "<div class='row'>",
-            "<div class='card'>",
-            "<div class='card-header'>WHAT WOULD YOU LIKE TO DO?</div>",
-            "<div class='card-body'>",
-            "<a href='/'>Browse Articles</a>",
-            "</div>",
-            "</div>",
+            "<div style='text-align: center; margin-top: 10px; background-color: #00e8ff;height: 50px;padding: 10px;font-weight: bold'>Oh! LOOK LIKES WE DO NOT HAVE ANY ARTICLES!</div>",
+            "<div style='text-align: center; margin-top: 10px; background-color: #b5ff00;height: 50px;padding: 10px;font-weight: bold'>WHAT WOULD YOU LIKE TO DO?</div>",
+            "<div style='text-align: center; margin-top: 10px; background-color: #ffd300;height: 50px;padding: 10px;font-weight: bold'>",
+            "<a href='/'  style='color: #560c94; text-align: center; margin-top: 10px; background-color: #ffd300;height: 50px;padding: 10px;font-weight: bold; text-decoration:none'>Browse Articles</a>",
             "</div>"
         ].join("")
     );
@@ -135,50 +133,52 @@ function makeNewRow() {
 }
 
 
-function createNotes() {
-    // display the modal
-    $("#modalForNotes").modal();
-    // get the id of the article and show the id on the modal-header
-    var article = $(this).parent().parent().data("article");
+// function createNotes() {
+//     // display the modal
+//     $("#myModal").modal();
+//     // get the id of the article and show the id on the modal-header
+//     var article = $(this).parent().parent().data("article");
 
-    var id = article._id;
+//     var id = article._id;
 
-    var articleId = $(["<h4>notes for the article :</h4>", "<span class='associatedid'>" + id + "</span>"].join(""));
-    $(".modal-header").html(articleId);
+//     var articleId = $(["<h4>notes for the article :</h4>", "<span class='associatedid'>" + id + "</span>"].join(""));
+//     $(".modal-title").html(articleId);
 
-    $.ajax({
-        url: "/notes/" + id,
-        method: "GET",
-    }).then(function(data){
-        $(".note-container").empty();
-        data.forEach(element => {
-            var list=$("<li>").addClass("list-group-item").text(element.comment.body);
-            $(".note-container").append(list);
-        });
+//     $.ajax({
+//         url: "/notes/" + id,
+//         method: "GET",
+//     }).then(function (data) {
+//         $(".note-container").empty();
+//         if (data.comment) {
+//             data.forEach(element => {
+//                 var list = $("<li>").addClass("list-group-item").text(element.comment.body);
+//                 $(".note-container").append(list);
+//             });
+//         }
 
-        // <li class="list-group-item">No notes for this article yet.</li>
-    })
+//     })
 
-}
+// }
 
 
-function saveNotes() {
+// function saveNotes() {
 
-    var comment = $("#userComment").val();
-    var id = $(".associatedid").text();   // grab the text inside the sapn using text() or html() method
+//     var comment = $("#userComment").val();
+//     var id = $(".associatedid").text();   // grab the text inside the span using text() or html() method
 
-    $.ajax({
-        url: "/notes/" + id,
-        method: "POST",
-        data: {
-            body: comment
-        }
-    }).then(function (data) {
-        $("#modalForNotes").hideAll();
+//     $.ajax({
+//         url: "/notes/" + id,
+//         method: "POST",
+//         data: {
+//             body: comment
+//         }
+//     }).then(function (data) {
+//         $("#modalForNotes").addClass("display", "none");
 
-        
-    })
-}
+
+
+//     })
+// }
 
 
 

@@ -132,13 +132,29 @@ app.post("/notes/:id", function (req, res) {
     db.Comment.create(req.body).then(function (dbComment) {
 
         return db.Article.findOneAndUpdate({ _id: req.params.id }, { comment: dbComment._id }, { new: true });
-   
-    
-    }).then(function(dbArticle){
+
+
+    }).then(function (dbArticle) {
         res.json(dbArticle);
         console.log(dbArticle)
     })
 })
+
+// route for grabbing all notes associated with an article
+app.get("/notes/:id", function (req, res) {
+    db.Article.findOne({ _id: req.params.id })
+        .populate("note")
+        .then(function (dbArticle) {
+            // If we were able to successfully find an Article with the given id, send it back to the client
+            res.json(dbArticle);
+        })
+        .catch(function (err) {
+            // If an error occurred, send it to the client
+            res.json(err);
+        });
+})
+
+
 // html routes for two pages-/saved and / (home)
 app.get("/saved", function (req, res) {
     res.sendFile(path.join(__dirname, "../MONGO-SCRAPER/public/save.html"));

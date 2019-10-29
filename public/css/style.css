@@ -56,32 +56,35 @@
      color: #ffffff !important;
  } */
  #firstlook{
-   background: url('../images/newspaper.jpg');
+   background: linear-gradient(0deg,rgba(191, 255, 0, 0.25),rgba(255,0,150,0.3)),url(../images/newspaper.jpg);
    height: 97vh;
+   opacity:0.5;
    width:100%;
    opacity: 0.95;
+   
    /* margin-bottom: 35px; */
    }
  
  #firstlook p {
-   color: rgb(7, 5, 5);
-   padding-top: 50vh;
-   font-size: 3vw;
-   padding-left: 36vw;
-   font-family: "Quicksand", sans-serif;
-   letter-spacing: 2px;
+
+  padding-top: 39vh;
+  font-size: 70px;
+  padding-left: 30vw;
+  font-family: "Cormorant SC";
+  letter-spacing: 2px;
+  color: #8e1717;
    
  }
  
  #firstlook a{
    margin-top: 47vh;
-   margin-left: 43vw;
-   font-size: 2vw;
+   margin-left: 36vw;
+   font-size: 30px;
    color:rgb(7, 5, 5);
    border: solid  1px;
    padding: 5px 15px 8px 15px;
-   font-family: "Quicksand", sans-serif;
-  
+   font-family: "Cormorant SC";
+   color: #8e1717;
    
  }
  
@@ -91,3 +94,45 @@
     position: absolute;
     top: 15px;
     right: 15px}
+
+    .card .card-header {
+      background-color: #abf3214d;
+      position: relative;
+      padding-top: 30px;
+      padding-bottom: 30px;
+  }
+
+
+  a {
+
+    color:black;
+  }
+
+
+.card .card-header .btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color:  #8e1717;
+    color:white;
+}
+
+.card{
+  top:15px;
+}
+
+
+
+
+   
+.footer {
+    margin-top: 40px;
+    height: 80px;
+    color: black;
+    padding: 25px;
+    background-color:#8F9FA6;
+}
+
+h2{
+  margin-top: 15px;
+}
