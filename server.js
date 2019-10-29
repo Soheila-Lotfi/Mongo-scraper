@@ -128,7 +128,7 @@ app.delete("/api/articles", function (req, res) {
 
 // route for saving a comment
 
-app.post("/notes/:id", function (req, res) {
+app.post("/api/notes/:id", function (req, res) {
     db.Comment.create(req.body).then(function (dbComment) {
 
         return db.Article.findOneAndUpdate({ _id: req.params.id }, { comment: dbComment._id }, { new: true });
@@ -141,7 +141,7 @@ app.post("/notes/:id", function (req, res) {
 })
 
 // route for grabbing all notes associated with an article
-app.get("/notes/:id", function (req, res) {
+app.get("/api/notes/:id", function (req, res) {
     db.Article.findOne({ _id: req.params.id })
         .populate("note")
         .then(function (dbArticle) {
