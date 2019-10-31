@@ -20,12 +20,10 @@ let ArticleSchema = new Schema({
         required: true
     },
 
-    comment: {
+    comment: [{
         type: Schema.Types.ObjectId,
         ref: "Comment"
-
-    }
+    }]
 })
-
 const Article = mongoose.model("Article", ArticleSchema);
 module.exports = Article;

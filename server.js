@@ -131,19 +131,34 @@ app.delete("/api/articles", function (req, res) {
 app.post("/api/notes/:id", function (req, res) {
     db.Comment.create(req.body).then(function (dbComment) {
 
-        return db.Article.findOneAndUpdate({ _id: req.params.id }, { comment: dbComment._id }, { new: true });
+        return db.Article.findByIdAndUpdate(req.params.id, { $push: { "comment": dbComment._id } }, { new: true });
 
 
     }).then(function (dbArticle) {
         res.json(dbArticle);
-        console.log(dbArticle)
+
+    }).catch(function (err) {
+        // If an error occurred, send it to the client
+        res.json(err);
+    });
+})
+
+//route for deleting a comment
+
+app.delete("/api/notes/:id", function (req, res) {
+
+    db.Comment.deleteOne({ _id: req.params.id }).then(function (date) {
+        res.json(data);
+    }).catch(function (err) {
+        res.json(err)
     })
 })
+
 
 // route for grabbing all notes associated with an article
 app.get("/api/notes/:id", function (req, res) {
     db.Article.findOne({ _id: req.params.id })
-        .populate("note")
+        .populate("comment")
         .then(function (dbArticle) {
             // If we were able to successfully find an Article with the given id, send it back to the client
             res.json(dbArticle);
