@@ -1,23 +1,16 @@
 
-
-
+// display all the articles that has been saved by user/ saved is true in database
 getArticles("/api/saved");
 
+///////////////////////////////////// event listener ///////////////////////////
 
 $(document).on("click", ".delete", deleteArticles);
 $(document).on("click", "#clearbtn", clearArticles);
 $(document).on("click", ".notebtn", handleArticleNotes);
 $(document).on("click", ".btn.save", handleNoteSave);
 $(document).on("click", ".btn.note-delete", handleNoteDelete);
-// var articles;
+//////////////////////////////////////////////////////////////////////////
 
-// function scrapeArticles(event) {
-
-//     event.preventDefault();
-//     getArticles("/articles");
-
-
-// }
 
 function getArticles(url) {
 
@@ -60,8 +53,6 @@ function createNewRow(article) {
     deleteArticle.addClass("delete btn mr-5").css("right", "120px");
 
 
-
-
     var articleNotes = $("<button>");
     articleNotes.text("ARTICLE NOTES");
     articleNotes.addClass("notebtn btn ml-5 ");
@@ -73,12 +64,10 @@ function createNewRow(article) {
     newArticleCardBody.addClass("card-body");
     var newArticleBody = $("<p>").text(article.summary);
 
-
-
+    // card-header
     newArticleCardHeading.append(newArticleHeadline);
     newArticleCardHeading.append(deleteArticle, articleNotes);
     newArticleCardBody.append(newArticleBody);
-
 
     newArticleCard.append(newArticleCardHeading);
     newArticleCard.append(newArticleCardBody);
@@ -110,7 +99,6 @@ function clearArticles() {
         $("#articles").empty();
         makeNewRow();
     })
-    // empty div with id=articles from the home page
 
 }
 
@@ -137,11 +125,11 @@ function makeNewRow() {
 function handleArticleNotes(event) {
     // This function handles opening the notes modal and displaying our notes
     // We grab the id of the article to get notes for from the card element the delete button sits inside
+
     const currentArticle = $(this).parent().parent().data("article")
 
     // Grab any notes with this headline/article id
     $.get("/api/notes/" + currentArticle._id).then(function (data) {
-
 
         var commentData = {
             _id: currentArticle._id,
@@ -199,26 +187,24 @@ function renderNotesList(data) {
 
 }
 
-
 function handleNoteSave() {
     // This function handles what happens when a user tries to save a new note for an article
     // Setting a variable to hold some formatted data about our note,
     // grabbing the note typed into the input box
-    var newNote = $(".bootbox-body textarea")
+    var newComment = $(".bootbox-body textarea")
         .val()
         .trim();
 
     var id = $(this).data("article")._id;
 
-
     // If we actually have data typed into the note input field, format it
     // and post it to the "/api/notes" route and send the formatted noteData as well
-    if (newNote) {
+    if (newComment) {
         $.ajax({
             method: "POST",
             url: "/api/notes/" + id,
             data: {
-                body: newNote
+                body: newComment
             }
         })
             // With that done
@@ -230,16 +216,15 @@ function handleNoteSave() {
     }
 }
 
-
 function handleNoteDelete() {
     // This function handles the deletion of notes
     // First we grab the id of the note we want to delete
     // We stored this data on the delete button when we created it
-    var noteToDelete = $(this).data("_id");
-    console.log(noteToDelete)
+    var commentToDelete = $(this).data("_id");
+    console.log(commentToDelete)
     // Perform an DELETE request to "/api/notes/" with the id of the note we're deleting as a parameter
     $.ajax({
-        url: "/api/notes/" + noteToDelete,
+        url: "/api/notes/" + commentToDelete,
         method: "DELETE"
     }).then(function () {
         // When done, hide the modal

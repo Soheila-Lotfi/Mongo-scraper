@@ -6,6 +6,8 @@ var path = require("path");
 // Axios is a promised-based http library, similar to jQuery's Ajax method
 // It works on the client and on the server
 var axios = require("axios");
+
+//we need cheerio to Parses our HTML and helps us find elements
 var cheerio = require("cheerio");
 
 // Require all models
@@ -17,8 +19,7 @@ var PORT = 3026;
 var app = express();
 
 // Configure middleware
-
-// Use morgan logger for logging requests
+///// Use morgan logger for logging requests
 app.use(logger("dev"));
 // Parse request body as JSON
 app.use(express.urlencoded({ extended: true }));
@@ -26,7 +27,7 @@ app.use(express.json());
 // Make public a static folder
 app.use(express.static("public"));
 
-// Connect to the Mongo DB
+// Connect to the Mongo DB- the name of database will be mongoscraper
 mongoose.connect("mongodb://localhost/mongoscraper", { useUnifiedTopology: true });
 
 // Routes
@@ -40,9 +41,6 @@ app.get("/scrape", function (req, res) {
     axios.get("https://www.nytimes.com/").then(function (response) {
         // Then, we load that into cheerio and save it to $ for a shorthand selector
         var $ = cheerio.load(response.data);
-
-
-
 
         // Now, we grab  every h2 within an article tag, and do the following:
         var articles = $("article a").slice(0, 10)
@@ -88,6 +86,7 @@ app.get("/articles", function (req, res) {
         res.json(err);
     })
 });
+
 // Route for updating articles
 app.put("/articles/:id", function (req, res) {
     db.Article.findOneAndUpdate({ _id: req.params.id }, { saved: true }).then(function (dbArticle) {
@@ -99,6 +98,7 @@ app.put("/articles/:id", function (req, res) {
             res.json(err);
         });
 })
+
 // route for getting saved articles
 app.get("/api/saved", function (req, res) {
 
@@ -108,6 +108,7 @@ app.get("/api/saved", function (req, res) {
         res.json(err);
     })
 });
+
 // Route for deleting an article
 app.delete("/api/articles/:id", function (req, res) {
 
@@ -117,6 +118,7 @@ app.delete("/api/articles/:id", function (req, res) {
         res.json(err)
     })
 })
+
 // Route for deleting all the articles
 
 app.delete("/api/articles", function (req, res) {

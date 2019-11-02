@@ -28,41 +28,19 @@
    text-decoration: none;
   
  }
-/*  
- .navbar-nav{
-   margin-right: 13vw;
-   font-size: 18px;
-   opacity: 0.8;
- 
- } */
+
  
  .navbar-collapse{
    flex-grow:0;
  }
- 
- /* nav .navbar-nav a{
-   color: white !important;
 
-   margin-right: 15% !important;
-   font-size: 20px;
- 
- }
- 
- nav .navbar-nav a:first-child {
-     border-left: 0 none;
-   }
- 
- nav .navbar-brand{
-     color: #ffffff !important;
- } */
  #firstlook{
    background: linear-gradient(0deg,rgba(191, 255, 0, 0.25),rgba(255,0,150,0.3)),url(../images/newspaper.jpg);
    height: 97vh;
    opacity:0.5;
    width:100%;
    opacity: 0.95;
-   
-   /* margin-bottom: 35px; */
+
    }
  
  #firstlook p {
@@ -88,7 +66,6 @@
    
  }
  
- 
 
 .modal a.close-modal {
     position: absolute;
@@ -101,7 +78,6 @@
       padding-top: 30px;
       padding-bottom: 30px;
   }
-
 
   a {
 
@@ -121,10 +97,7 @@
   top:15px;
 }
 
-
-
-
-   
+ 
 .footer {
     margin-top: 40px;
     height: 80px;

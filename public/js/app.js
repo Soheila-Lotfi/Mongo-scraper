@@ -4,7 +4,7 @@
 // when the page loads for the first time shows articles that have been scraped last time 
 getArticles("/articles");
 
-
+///////////////////////////////////// event listener ///////////////////////////
 
 // when the user clicks on the scrape article button on the page, scrape new york times website and display the result on the page.
 $(document).on("click", "#scrapebtn", scrapeArticles);
@@ -13,13 +13,12 @@ $(document).on("click", ".save", saveArticles);
 //when the user clicks on the Delete From Saved  button on the page, delete the article
 $(document).on("click", "#clearbtn", clearArticles);
 
+////////////////////////////////////////////////////////////////////////////////
 
 function scrapeArticles() {
     console.log('scrapeArticles')
 
     $.ajax({ url: "/scrape", method: "GET" }).then(function (res) {
-        console.log('scrape ajax')
-
         console.log(res)
 
         $.getJSON("/articles", function (data) {
@@ -32,11 +31,11 @@ function scrapeArticles() {
 }
 
 
-
-
 // get articles from database and make a row for each article on the page
 function getArticles(url) {
 
+    // if there are articles in database create a row for each article and display it
+    // otherwise makenewRow which shows there is no scraped article
     $.getJSON(url, function (data) {
         if (data.length > 0) {
             initializeRows(data);
@@ -76,19 +75,16 @@ function createNewRow(article) {
     saveArticle.addClass("save btn ml-5 ");
     var newArticleHeadline = $("<a>").text(article.title + "").attr("href", article.link);
 
-
     // card-body
     var newArticleCardBody = $("<div>");
     newArticleCardBody.addClass("card-body");
     var newArticleBody = $("<p>").text(article.summary);
 
-
-
+    // card-header
     newArticleCardHeading.append(newArticleHeadline);
     newArticleCardHeading.append(saveArticle);
     newArticleCardBody.append(newArticleBody);
-
-
+    // the whole card
     newArticleCard.append(newArticleCardHeading);
     newArticleCard.append(newArticleCardBody);
     newArticleCard.data("article", article);
@@ -120,7 +116,6 @@ function clearArticles() {
         $("#articles").empty();
         makeNewRow();
     })
-    // empty div with id=articles from the home page
 
 }
 
@@ -147,5 +142,5 @@ function makeNewRow() {
 
 
 
-// })
+
 
