@@ -73,7 +73,7 @@
     right: 15px}
 
     .card .card-header {
-      background-color: #abf3214d;
+      background-color: #006c62;
       position: relative;
       padding-top: 30px;
       padding-bottom: 30px;
@@ -87,10 +87,11 @@
 
 .card .card-header .btn {
     position: absolute;
-    top: 20px;
+    top: 14px;
     right: 20px;
-    background-color:  #8e1717;
+    background-color:  #757373;
     color:white;
+ 
 }
 
 .card{

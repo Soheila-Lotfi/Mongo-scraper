@@ -110,10 +110,10 @@ function makeNewRow() {
 
             "<div class='row'>",
             "<div class='col-12'>",
-            "<div style='text-align: center; margin-top: 10px; background-color: #00e8ff;height: 50px;padding: 10px;font-weight: bold'>Oh! LOOK LIKES WE DO NOT HAVE ANY ARTICLES!</div>",
-            "<div style='text-align: center; margin-top: 10px; background-color: #b5ff00;height: 50px;padding: 10px;font-weight: bold'>WHAT WOULD YOU LIKE TO DO?</div>",
-            "<div style='text-align: center; margin-top: 10px; background-color: #ffd300;height: 50px;padding: 10px;font-weight: bold'>",
-            "<a href='/'  style='color: #560c94; text-align: center; margin-top: 10px; background-color: #ffd300;height: 50px;padding: 10px;font-weight: bold; text-decoration:none'>Browse Articles</a>",
+            "<div style='text-align: center; margin-top: 10px; color:white; background-color: #85231c;height: 50px;padding: 10px;font-weight: bold'>Oh! LOOK LIKES WE DO NOT HAVE ANY ARTICLES!</div>",
+            "<div style='text-align: center; margin-top: 10px; color:white; background-color: #e82719;height: 50px;padding: 10px;font-weight: bold'>WHAT WOULD YOU LIKE TO DO?</div>",
+            "<div style='text-align: center; margin-top: 10px; color:white; background-color: #c3847f;height: 50px;padding: 10px;font-weight: bold'>",
+            "<a href='/'  style='color: #560c94; text-align: center; margin-top: 10px; color:white; background-color: #c3847f;height: 50px;padding: 10px;font-weight: bold; text-decoration:none'>Browse Articles</a>",
             "</div>"
         ].join("")
     );

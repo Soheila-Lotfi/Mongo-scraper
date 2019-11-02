@@ -47,13 +47,15 @@ app.get("/scrape", function (req, res) {
         articles.each(function (i, element) {
             // Save an empty result object
             var result = {};
-
+            var link;
             // Add the text and href of every link, and save them as properties of the result object
             result.title = $(this)
                 .find("h2")
                 .text();
-            result.link = $(this)
+            link = $(this)
                 .attr("href");
+            result.link = "https://www.nytimes.com" + link;
+            console.log(result.link);
             result.summary = $(this)
                 .find("p")
                 .text();

@@ -71,7 +71,7 @@ function createNewRow(article) {
     var newArticleCardHeading = $("<div>");
     newArticleCardHeading.addClass("card-header ");
     var saveArticle = $("<button>");
-    saveArticle.text("SaveArticle");
+    saveArticle.text("Save Article");
     saveArticle.addClass("save btn ml-5 ");
     var newArticleHeadline = $("<a>").text(article.title + "").attr("href", article.link);
 
@@ -127,11 +127,11 @@ function makeNewRow() {
 
             "<div class='row'>",
             "<div class='col-12'>",
-            "<div style='text-align: center; margin-top: 10px; background-color: #00e8ff;height: 50px;padding: 10px;font-weight: bold'>Oh! LOOK LIKES WE DO NOT HAVE ANY ARTICLES!</div>",
-            "<div style='text-align: center; margin-top: 10px; background-color: #b5ff00;height: 50px;padding: 10px;font-weight: bold'>WHAT WOULD YOU LIKE TO DO?</div>",
-            "<div style='text-align: center; margin-top: 10px; background-color: #ffd300;height: 50px;padding: 10px;font-weight: bold'>",
-            "<a href='#' onclick='scrapeArticles()' style='color: #560c94; text-align: center; margin-top: 10px; background-color: #ffd300;height: 50px;padding: 10px;font-weight: bold; text-decoration:none'>Try Scraping New Articles</a>",
-            "<a href='/saved'  style='color: #560c94; text-align: center; margin-top: 10px; background-color: #ffd300;height: 50px;padding: 10px;font-weight: bold; text-decoration:none'>Go To Saved Articles</a>",
+            "<div style='text-align: center; margin-top: 10px; color:white; background-color: #85231c;height: 50px;padding: 10px;font-weight: bold'>Oh! LOOK LIKES WE DO NOT HAVE ANY ARTICLES!</div>",
+            "<div style='text-align: center; margin-top: 10px; color:white; background-color: #e82719;height: 50px;padding: 10px;font-weight: bold'>WHAT WOULD YOU LIKE TO DO?</div>",
+            "<div style='text-align: center; margin-top: 10px; color:white; background-color: #c3847f;height: 50px;padding: 10px;font-weight: bold'>",
+            "<a href='#' onclick='scrapeArticles()' style='color: white; text-align: center; margin-top: 10px; background-color: #c3847f;height: 50px;padding: 10px;font-weight: bold; text-decoration:none'>Try Scraping New Articles</a>",
+            "<a href='/saved'  style='color: white; text-align: center; margin-top: 10px; background-color: #c3847f;height: 50px;padding: 10px;font-weight: bold; text-decoration:none'>Go To Saved Articles</a>",
             "</div>"
         ].join("")
     );
