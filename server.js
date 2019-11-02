@@ -34,6 +34,8 @@ mongoose.connect("mongodb://localhost/mongoscraper", { useUnifiedTopology: true 
 // A GET route for scraping the new york times website
 app.get("/scrape", function (req, res) {
 
+    var articlesArray = [];
+
     // First, we grab the body of the html with axios
     axios.get("https://www.nytimes.com/").then(function (response) {
         // Then, we load that into cheerio and save it to $ for a shorthand selector
@@ -59,7 +61,7 @@ app.get("/scrape", function (req, res) {
                 .text();
             result.saved = "false";
 
-
+            articlesArray.push(result);
 
             // Create a new Article using the `result` object built from scraping
             db.Article.create(result)
@@ -73,7 +75,7 @@ app.get("/scrape", function (req, res) {
                 });
         });
 
-        res.json(result);
+        res.json(articlesArray);
     });
 });
 

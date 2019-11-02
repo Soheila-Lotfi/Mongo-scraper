@@ -1,48 +1,37 @@
 
-// $(document).ready(function () {
 
 
+// when the page loads for the first time shows articles that have been scraped last time 
 getArticles("/articles");
-
 
 
 
 // when the user clicks on the scrape article button on the page, scrape new york times website and display the result on the page.
 $(document).on("click", "#scrapebtn", scrapeArticles);
-// //when the user clicks on the save articles button on the page, save articles and display it on the /saved page
+//when the user clicks on the save articles button on the page, save articles and display it on the /saved page
 $(document).on("click", ".save", saveArticles);
-// // //when the user clicks on the Delete From Saved  button on the page, delete the article
+//when the user clicks on the Delete From Saved  button on the page, delete the article
 $(document).on("click", "#clearbtn", clearArticles);
 
 
-
 function scrapeArticles() {
+    console.log('scrapeArticles')
 
-    // doAjaxFirst(getArticleLater);
+    $.ajax({ url: "/scrape", method: "GET" }).then(function (res) {
+        console.log('scrape ajax')
 
-    // function doAjaxFirst(callback) {
-    $.ajax({ url: "/scrape", method: "GET" }).then(function (err, res) {
-        if (err) throw err;
-        // console.log(res.title);
-        // callback();
-        // getArticles("/articles");
+        console.log(res)
+
+        $.getJSON("/articles", function (data) {
+            initializeRows(data);
+        })
+
     })
 
-    // }
-    // function getArticleLater() {
-
-    getArticlesafterScraping("/articles")
-    // }
 
 }
 
 
-function getArticlesafterScraping(url) {
-    $.getJSON(url, function (data) {
-        initializeRows(data);
-
-    })
-}
 
 
 // get articles from database and make a row for each article on the page
@@ -64,6 +53,8 @@ function getArticles(url) {
 }
 
 function initializeRows(articles) {
+    console.log('initializeRows');
+    // console.log(articles)
     $("#articles").empty();
     var articlesToAdd = [];
     for (var i = 0; i < articles.length; i++) {

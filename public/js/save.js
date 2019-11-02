@@ -142,12 +142,12 @@ function handleArticleNotes(event) {
     // Grab any notes with this headline/article id
     $.get("/api/notes/" + currentArticle._id).then(function (data) {
 
-        
+
         var commentData = {
             _id: currentArticle._id,
             comments: data.comment || []
         };
-        console.log(data)
+        // console.log(data)
         // Constructing our initial HTML to add to the notes modal
         var modalText = $("<div class='container-fluid text-center'>").append(
             $("<h4>").text("Notes For Article: " + currentArticle._id),
@@ -206,9 +206,9 @@ function handleNoteSave() {
     // grabbing the note typed into the input box
     var newNote = $(".bootbox-body textarea")
         .val()
-        .trim(); 
+        .trim();
 
-        var id=$(this).data("article")._id;
+    var id = $(this).data("article")._id;
 
 
     // If we actually have data typed into the note input field, format it
@@ -216,16 +216,16 @@ function handleNoteSave() {
     if (newNote) {
         $.ajax({
             method: "POST",
-            url: "/api/notes/"+ id,
+            url: "/api/notes/" + id,
             data: {
-                body:newNote
+                body: newNote
             }
         })
             // With that done
             .then(function (res) {
                 bootbox.hideAll();
-                console.log(res)
-        
+                // console.log(res)
+
             });
     }
 }
@@ -239,13 +239,13 @@ function handleNoteDelete() {
     console.log(noteToDelete)
     // Perform an DELETE request to "/api/notes/" with the id of the note we're deleting as a parameter
     $.ajax({
-      url: "/api/notes/" + noteToDelete,
-      method: "DELETE"
-    }).then(function() {
-      // When done, hide the modal
-      bootbox.hideAll();
+        url: "/api/notes/" + noteToDelete,
+        method: "DELETE"
+    }).then(function () {
+        // When done, hide the modal
+        bootbox.hideAll();
     });
-  }
+}
 
 
 
