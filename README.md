@@ -38,9 +38,18 @@ the saved page. Also, in saved page, the user is able to delete articles or add 
    
 ![image](https://user-images.githubusercontent.com/49765334/68078300-c5b84900-fda9-11e9-9f30-e0f632c883b2.png)
 
+
+
+
 ![image](https://user-images.githubusercontent.com/49765334/68078303-d5379200-fda9-11e9-8c0c-5d3fd49dfc70.png)
 
+
+
+
 ![image](https://user-images.githubusercontent.com/49765334/68078306-ea142580-fda9-11e9-8685-fa107c00a40a.png)
+
+
+
 
 ![image](https://user-images.githubusercontent.com/49765334/68078309-fdbf8c00-fda9-11e9-9e33-ae8d2e7c04a4.png)
 
