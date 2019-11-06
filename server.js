@@ -29,7 +29,7 @@ app.use(express.static("public"));
 
 // Connect to the Mongo DB- the name of database will be mongoscraper
 // mongoose.connect("mongodb://<dbuser>:<dbpassword>@ds141188.mlab.com:41188/heroku_rqrnzqz8", { useUnifiedTopology: true });
-mongoose.connect(process.env.MONGODB_URI || "mongodb://<dbuser>:<dbpassword>@ds141188.mlab.com:41188/heroku_rqrnzqz8");
+mongoose.connect(process.env.MONGODB_URI || "mongodb://user1:password1@ds141188.mlab.com:41188/heroku_rqrnzqz8");
 // Routes
 
 // A GET route for scraping the new york times website
