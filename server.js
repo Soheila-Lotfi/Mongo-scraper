@@ -178,11 +178,11 @@ app.get("/api/notes/:id", function (req, res) {
 
 // html routes for two pages-/saved and / (home)
 app.get("/saved", function (req, res) {
-    res.sendFile(path.join(__dirname, "../MONGO-SCRAPER/public/save.html"));
+    res.sendFile(path.join(__dirname, "public/save.html"));
 });
 
 app.get("/", function (req, res) {
-    res.sendFile(path.join(__dirname, "../MONGO-SCRAPER/public/index.html"));
+    res.sendFile(path.join(__dirname, "/public/index.html"));
 });
 
 
